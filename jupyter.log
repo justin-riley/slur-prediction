@@ -1,0 +1,19 @@
+[I 15:30:09.364 NotebookApp] [jupyter_nbextensions_configurator] enabled 0.4.1
+[I 15:30:09.390 NotebookApp] JupyterLab extension loaded from /home/justin/.local/opt/anaconda2/envs/galvanize/lib/python3.7/site-packages/jupyterlab
+[I 15:30:09.390 NotebookApp] JupyterLab application directory is /home/justin/.local/opt/anaconda2/envs/galvanize/share/jupyter/lab
+[I 15:30:09.391 NotebookApp] Serving notebooks from local directory: /home/justin/.local/share/xdg/media/documents/textfiles/galvanize/slur-prediction
+[I 15:30:09.391 NotebookApp] The Jupyter Notebook is running at:
+[I 15:30:09.391 NotebookApp] http://localhost:8888/?token=48ffd5408f711d4c32a6c68b8c1a3f01d3e3807e30622bec
+[I 15:30:09.391 NotebookApp]  or http://127.0.0.1:8888/?token=48ffd5408f711d4c32a6c68b8c1a3f01d3e3807e30622bec
+[I 15:30:09.391 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 15:30:09.407 NotebookApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///home/justin/.local/share/jupyter/runtime/nbserver-22695-open.html
+    Or copy and paste one of these URLs:
+        http://localhost:8888/?token=48ffd5408f711d4c32a6c68b8c1a3f01d3e3807e30622bec
+     or http://127.0.0.1:8888/?token=48ffd5408f711d4c32a6c68b8c1a3f01d3e3807e30622bec
+Gtk-Message: 15:30:14.587: Failed to load module "appmenu-gtk-module"
+JavaScript error: jar:file:///usr/lib/purebrowser/omni.ja!/components/XULStore.js, line 65: Error: Can't find profile directory.
+[C 16:30:05.751 NotebookApp] received signal 15, stopping
+[I 16:30:05.752 NotebookApp] Shutting down 0 kernels
