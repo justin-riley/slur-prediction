@@ -10,30 +10,40 @@ from textblob import TextBlob
 from collections import deque
 from pandas import DataFrame,Series,to_datetime,read_csv
 #%%
-creds = {}
-with open('/home/justin/.local/cache/reddit/info','r') as credentials:
-    creds = load(credentials)
-client_auth = requests.auth.HTTPBasicAuth(creds['ID'],creds['SECRET'])
-post_data = { 'grant_type':  'password',
-              'username':    creds['USER'],
-              'password':    creds['PASS']
-              }
-headers = { 'User-Agent':creds['AGENT'] }
-response = requests.post('https://www.reddit.com/api/v1/access_token',
-                    auth=client_auth,data=post_data,headers=headers)
+def create_reddit_instance(authfile='/home/justin/.local/cache/reddit/info'):
+    '''
+    Creates a reddit instance.
 
-token = response.json()['access_token']
-headers = { "Authorization": token, 
-            "User-Agent":    creds['AGENT']
-            }
-response = requests.get("https://oauth.reddit.com/api/v1/me", 
-                        headers=headers)
+    Parameters:
+    -----------
+    authfile:   str:    Path to file containing account information
 
-reddit = Reddit(client_id       = creds['ID'],
-                client_secret   = creds['SECRET'],
-                user_agent      = creds['AGENT'],
-                username        = creds['USER'],
-                password        = creds['PASS'])
+    Returns:
+    --------
+    Reddit instance
+
+    '''
+    with open(authfile,'r') as credentials:
+        creds = load(credentials)
+    client_auth = requests.auth.HTTPBasicAuth(creds['ID'],creds['SECRET'])
+    post_data = { 'grant_type':  'password',
+                  'username':  creds['USER'],
+                  'password':  creds['PASS']}
+    headers = { 'User-Agent':creds['AGENT'] }
+    response = requests.post('https://www.reddit.com/api/v1/access_token',
+                             auth=client_auth,data=post_data,headers=headers)
+
+    token = response.json()['access_token']
+    headers = { "Authorization": token, 
+                "User-Agent":    creds['AGENT']}
+    response = requests.get("https://oauth.reddit.com/api/v1/me", 
+                            headers=headers)
+
+    return Reddit(client_id       = creds['ID'],
+                  client_secret   = creds['SECRET'],
+                  user_agent      = creds['AGENT'],
+                  username        = creds['USER'],
+                  password        = creds['PASS'])
 
 searched_subs = ['AntiLGBTQIA','againsttrans','DiversityNews',
 'hardunpopularopinon','thereareonly2genders','pics','justiceserved',
@@ -148,5 +158,5 @@ def scrape_subreddits(searched_subs, reddit, dictionary, queue):
             parse_comment_forest(queue.popleft(),\
                                 dictionary, queue)
 #%%
-if __name__ == __main__:
-    
+if __name__ =='__main__':
+    pass

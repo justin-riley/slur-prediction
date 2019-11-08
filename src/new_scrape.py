@@ -98,14 +98,6 @@ def build_dataframe(comment, df, directory=project_dir, filename=file_contents):
 
 def scrape(user, reddit, dictionary, queue):
 
-    def get_controversial(user):
-        return reddit.redditor(user).comments.controversial(limit=None)
-    def get_hot(user):
-        return reddit.redditor(user).comments.hot(limit=None)
-    def get_new(user):
-        return reddit.redditor(user).comments.new(limit=None)
-    def get_top(user):
-        return reddit.redditor(user).comments.controversial(limit=None)
     sorting_methods = \
     [
         lambda sub: reddit.redditor(user).comments.controversial(limit=None),
@@ -118,7 +110,7 @@ def scrape(user, reddit, dictionary, queue):
     for z in sorting_methods:
         for comment in z(user):
             if comment.id not in dictionary['comment_id']:
-                build_dataframe(comment,dictionary)
+                build_dataframe(comment,dictionary,filename='wednesday_night_user_scrapes')
                 #parse_comment_forest(comment.replies, dictionary, queue)
 
 def scrape_subreddits(searched_subs, reddit, dictionary, queue):
@@ -129,13 +121,14 @@ def scrape_subreddits(searched_subs, reddit, dictionary, queue):
           lambda sub: reddit.subreddit(sub).controversial() ]
 
     for subreddit in searched_subs:
-        for sorting in sorting_methods:
+        for sorting in sorting_methods[::-1]:
             for submission in sorting(subreddit):
                 submission.comments.replace_more(limit=None)
                 for comment in submission.comments.list():
                     print('starting with new redditor')
-                    print(comment.author.name)
-                    scrape(comment.author.name, reddit, dictionary,queue)
+                    if comment.author:
+                        print(comment.author.name)
+                        scrape(comment.author.name, reddit, dictionary,queue)
         #while len(queue) >= 1:
          #   parse_comment_forest(queue.popleft(),\
           #                      dictionary, queue)

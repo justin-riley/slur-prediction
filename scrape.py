@@ -97,6 +97,25 @@ def parse_comment_forest(CommentForest, df1,deq):
             deq.append(comment.replies)
 
 def scrape(redditor, reddit, dictionary, queue):
+    '''
+    Function that takes a list of redditors, a reddit instance, a
+    dictionary, and a queue, then iterates through the list of 
+    redditors and collects all available comments from their 
+    histories.
+
+    Parameters:
+    -----------
+    redditor:   list:   list of strings corresponding to Reddit
+                            usernames
+    reddit:     Reddit: praw Reddit instance
+    dictionary: dict:   dictionary where comment attributes will
+                            be stored
+    queue:      deque:  to be removed.
+
+    Returns:
+    --------
+    None
+    '''
     from pandas import concat
     #ignore_users = concat([read_csv('data/slurs/sluring_users_updated.csv'),read_csv('data/slur_users_mon.csv) ])
     ignore_users = list(read_csv('data/slurs/sluring_users_updated_mon.csv')['author'].unique())
