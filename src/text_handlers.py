@@ -88,6 +88,19 @@ def clean_text(comment, keep_periods=True,\
         tr_tab = str.maketrans(translation_dic)
     return remove_emoji(comment,keep_emoji_words).translate(tr_tab)
 
+def lemmatize(comment):
+    '''
+    Returns lemmatized version of reddit comment.
+
+    Parameters:
+    -----------
+    comment:        str:    comment to lemmatize
+
+    Returns:
+    --------
+    return_list:    str:  
+    '''
+    pass
 def count_emoji(comment):
     '''
     Function that counts number of emoji in a string.
@@ -148,9 +161,12 @@ def stopwords_list(series,fraction = 0.2):
     ctr = [(word,count) for word,count in Counter(out).items()]
     ctr.sort(key=lambda x:x[1])
     ctr = ctr[::-1]
-    cutoff_index = int(fraction*len(ctr))
-    stopwords = [word for word,number in ctr]
-    return stopwords[:cutoff_index]
+    if not fraction:
+        return ctr
+    else:
+        cutoff_index = int(fraction*len(ctr))
+        stopwords = [word for word,number in ctr]
+        return stopwords[:cutoff_index]
 
 def series_grams(series,n=2):
     '''
